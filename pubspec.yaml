@@ -1,0 +1,31 @@
+name: self_widget
+description: A new Flutter package.
+version: 0.0.1
+# author:
+# homepage: self_widget
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # firebase_auth: # ^0.6.6 # use older package to support phoneAuth
+  animated_widgets: ^1.0.3
+  google_fonts: ^0.3.10
+  hive: ^1.4.1+1
+  http: ^0.12.0+4
+  dartz: ^0.8.9
+  path_provider: ^1.6.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+  assets:
+    - assets/
