@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:dartz/dartz.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'dart:async';
 
@@ -19,16 +19,20 @@ Future<Either<Failure, E>> getDecodedResponse<E>(String url) async {
   var responseJson;
 
   try {
-    final r = await get(url);
+    final r = await http.get(url);
+
     responseJson = getFailureOrResponse(r);
   } catch (e) {
     if (e is SocketException) {
-      if (e.message.contains('Failed host lookup')) {
-        return left(Failure(
-            "Sorry could not establish connection. Are you connected to Internet ?"));
-      } else {
-        return left(Failure("A failure Occured ${e.message}"));
-      }
+      return left(Failure(
+          "Sorry could not establish connection. Are you connected to Internet ?"));
+      // if (e.message.contains('Failed host lookup') ||
+      //     e.message.contains('Network is unreachable')) {
+      //   return left(Failure(
+      //       "Sorry could not establish connection. Are you connected to Internet ?"));
+      // } else {
+      //   return left(Failure("A failure Occured ${e.message}"));
+      // }
     } else
       return left(Failure("A failure Occured $e"));
   }
@@ -39,7 +43,7 @@ Future<Either<Failure, E>> getDecodedResponse<E>(String url) async {
     return right(responseJson as E);
 }
 
-dynamic getFailureOrResponse(Response response) {
+dynamic getFailureOrResponse(http.Response response) {
   if (isSuccess(response)) {
     var responseJson = json.decode(response.body.toString());
     return responseJson;
@@ -58,5 +62,5 @@ dynamic getFailureOrResponse(Response response) {
   }
 }
 
-bool isSuccess(Response response) =>
+bool isSuccess(http.Response response) =>
     response.statusCode >= 200 && response.statusCode <= 300;

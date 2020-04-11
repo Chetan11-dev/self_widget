@@ -21,6 +21,7 @@ class BackdropScaffold extends StatefulWidget {
   final AnimationController controller;
   final Widget title;
   final Widget backLayer;
+  final AnimatedIconData animatedIcon;
   final Widget frontLayer;
   final List<Widget> actions;
   final double headerHeight;
@@ -28,7 +29,7 @@ class BackdropScaffold extends StatefulWidget {
   final BackdropIconPosition iconPosition;
   final bool stickyFrontLayer;
   final Curve animationCurve;
-
+  final Widget bottomNavigationBar;
   BackdropScaffold({
     this.controller,
     this.title,
@@ -43,6 +44,8 @@ class BackdropScaffold extends StatefulWidget {
     this.iconPosition = BackdropIconPosition.leading,
     this.stickyFrontLayer = false,
     this.animationCurve = Curves.linear,
+    this.animatedIcon = AnimatedIcons.close_menu,
+    this.bottomNavigationBar,
   });
 
   @override
@@ -193,14 +196,20 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
       onWillPop: () => _willPopCallback(context),
       child: Scaffold(
         key: scaffoldKey,
+        bottomNavigationBar: widget.bottomNavigationBar,
         appBar: AppBar(
           title: widget.title,
           actions: widget.iconPosition == BackdropIconPosition.action
-              ? <Widget>[BackdropToggleButton()] + widget.actions
+              ? <Widget>[
+                    BackdropToggleButton(
+                      icon: widget.animatedIcon,
+                    )
+                  ] +
+                  widget.actions
               : widget.actions,
           elevation: 0.0,
           leading: widget.iconPosition == BackdropIconPosition.leading
-              ? BackdropToggleButton()
+              ? BackdropToggleButton(icon: widget.animatedIcon)
               : null,
         ),
         body: LayoutBuilder(
@@ -237,7 +246,7 @@ class BackdropToggleButton extends StatelessWidget {
   final AnimatedIconData icon;
 
   const BackdropToggleButton({
-    this.icon = AnimatedIcons.close_menu,
+    @required this.icon,
   });
 
   @override
