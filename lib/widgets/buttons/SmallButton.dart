@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:self_widget/Theme/Helpers/sbHelper.dart';
-import 'package:self_widget/self_widget.dart';
 import 'package:self_widget/widgets/Animated/BouncyBouncy.dart';
 
 class SmallButton extends StatelessWidget {
@@ -13,7 +11,7 @@ class SmallButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: szh(10), horizontal: szw(30)),
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
       decoration: BoxDecoration(
         color: bgColor ?? Theme.of(context).primaryColor,
         borderRadius: BorderRadius.circular(10),
@@ -26,8 +24,6 @@ class SmallButton extends StatelessWidget {
     );
   }
 }
-
-
 
 class SmallBouncyButton extends StatelessWidget {
   final Color textColor, bgColor;

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:self_widget/Theme/Helpers/sbHelper.dart';
 import 'package:self_widget/widgets/Animated/curves_delay_animation.dart';
 
 showDialogBox(
@@ -24,7 +23,7 @@ showDialogBox(
                 icon: Icon(
                   Icons.close,
                   color: Colors.red[400],
-                  size: sz(36),
+                  size: 36,
                 ),
                 onPressed: () {
                   onNotOk();
@@ -43,7 +42,7 @@ showDialogBox(
                 icon: Icon(
                   Icons.check,
                   color: Colors.green,
-                  size: sz(36),
+                  size: 36,
                 ),
                 onPressed: () {
                   onOktap();
@@ -111,7 +110,10 @@ showDialogBox(
                         //   )
                         // ],
                         ),
-                    sb(sz(10)),
+
+                    SizedBox(
+                      height: 10,
+                    ),
                   ],
                 ),
               ),
